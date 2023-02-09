@@ -1,30 +1,42 @@
-import { Box, Button, Paper, Stack, TextField, Typography } from '@mui/material';
+import { Box, Button, Stack, TextField, Typography } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { LOGIN, PAPER } from '../../styled/login';
+import { useForm } from 'react-hook-form';
 
 const Register = () => {
+    const { register, handleSubmit, formState: { errors } } = useForm();
+
+
+
+    const handleLoginInfo = (data) => {
+        console.log(data)
+    }
+
     return (
         <LOGIN>
             <PAPER>
                 <Typography sx={{ fontSize: '2.5rem', textAlign: 'center', padding: '1.5rem 0', fontWeight: 'bold', textTransform: 'uppercase' }}>Register</Typography>
-                <form>
+                <form onSubmit={handleSubmit(handleLoginInfo)}>
                     <Stack spacing={3} >
                         <Box>
                             {/* <label htmlFor="name">Name</label> */}
-                            <TextField sx={{ width: '100%', }} id="outlined-basic" label="Your Name" variant="outlined" />
+                            <TextField type="text" sx={{ width: '100%', }} id="outlined-basic" label="Your Name" variant="outlined" {...register("name", { required: "Name is required" })}   />
+                            {errors.email && <p className='text-red-600 font-semibold'>{errors?.email?.message}</p>}
                         </Box>
                         <Box>
                             {/* <label htmlFor="name">Name</label> */}
-                            <TextField sx={{ width: '100%', }} id="outlined-basic" label="Email" variant="outlined" />
+                            <TextField type="email" sx={{ width: '100%', }} id="outlined-basic" label="Email" variant="outlined" {...register("email", { required: "email is required" })}  />
+                            {errors.email && <p className='text-red-600 font-semibold'>{errors?.email?.message}</p>}
                         </Box>
                         <Box >
                             {/* <label htmlFor="name">Name</label> */}
-                            <TextField sx={{ width: '100%', }} type="password" id="outlined-basic" label="Password" variant="outlined" />
+                            <TextField type="password" sx={{ width: '100%', }}  id="outlined-basic" label="Password" variant="outlined" {...register("password", { required: "password is required" })}  />
+                            {errors.email && <p className='text-red-600 font-semibold'>{errors?.email?.message}</p>}
                         </Box>
 
                         <Box>
-                            <Button type='submit' variant="contained">Submit</Button>
+                            <Button type='submit' variant="subit">Submit</Button>
                         </Box>
 
                         <Box sx={{
