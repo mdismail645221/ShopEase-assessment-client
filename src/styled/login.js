@@ -7,8 +7,11 @@ export const LOGIN = styled('div')(({ theme }) => ({
     display: 'grid',
     placeItems: 'center'
 }));
+
 export const PAPER = styled(Paper)(({ theme }) => ({
     width: '500px',
-    background: 'red',
-    height: '500px'
+    background: '#ffffff',
+    height: '500px',
+    padding: '1rem',
+    boxShadow: '5px 7px 7px 5px #dddddd'
 }));
