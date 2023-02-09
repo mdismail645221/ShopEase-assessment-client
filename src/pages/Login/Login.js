@@ -1,14 +1,15 @@
 import { Box, Paper, Typography } from '@mui/material';
 import React from 'react';
+import { LOGIN, PAPER } from '../../styled/login';
 
 const Login = () => {
     return (
-        <Box>
-            <Typography>LOGIN</Typography>
-            <Paper>
+        <LOGIN>
+            <PAPER>
+                <Typography>LOGIN</Typography>
 
-            </Paper>
-        </Box>
+            </PAPER>
+        </LOGIN>
     );
 };
 
