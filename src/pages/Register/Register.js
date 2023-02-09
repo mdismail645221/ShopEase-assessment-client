@@ -31,19 +31,19 @@ const Register = () => {
                         </Box>
                         <Box >
                             {/* <label htmlFor="name">Name</label> */}
-                            <TextField type="password" sx={{ width: '100%', }}  id="outlined-basic" label="Password" variant="outlined" {...register("password", { required: "password is required" })}  />
+                            <TextField type="password" sx={{ width: '100%', }}  id="outlined-basic" label="Password" variant="outlined" {...register("password", { required: "password is required" })} required />
                             {errors.email && <p className='text-red-600 font-semibold'>{errors?.email?.message}</p>}
                         </Box>
 
                         <Box>
-                            <Button type='submit' variant="subit">Submit</Button>
+                            <Button type='submit' variant="contained">Submit</Button>
                         </Box>
 
                         <Box sx={{
                             '& a': { color: "blue" },
                             '& a:hover': { textDecoration: 'underline' }
                         }}>
-                            <Typography>have you already <Link to='/login'>Login</Link></Typography>
+                            <Typography>Don't have a account? <Link to='/login'>Create account</Link></Typography>
                         </Box>
 
                     </Stack>
