@@ -8,6 +8,7 @@ export const LOGIN = styled('div')(({ theme }) => ({
     placeItems: 'center'
 }));
 
+
 export const PAPER = styled(Paper)(({ theme }) => ({
     width: '500px',
     background: '#ffffff',

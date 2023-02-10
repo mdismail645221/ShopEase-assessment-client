@@ -77,12 +77,12 @@ const Register = () => {
     return (
         <REGISTER>
             <REGPAPER>
-                <Typography sx={{ fontSize: '2.5rem', textAlign: 'center', padding: '1.5rem 0', fontWeight: 'bold', textTransform: 'uppercase' }}>Register</Typography>
+                <Typography sx={{ fontSize: '1.5rem', textAlign: 'center', padding: '1.5rem 0', fontWeight: 'bold', textTransform: 'uppercase' }}>Register</Typography>
                 <form onSubmit={handleSubmit(handleLoginInfo)}>
                     <Stack spacing={3} >
                         <Box>
                             {/* <label htmlFor="name">Name</label> */}
-                            <TextField type="text" sx={{ width: '100%', }} label="Your Name" variant="outlined" {...register("name", { required: "Name is required" })} />
+                            <TextField type="text" sx={{ width: '100%',padding: '0px' }} label="Your Name" variant="outlined" {...register("name", { required: "Name is required" })} />
                             {errors.email && <p className='text-red-600 font-semibold'>{errors?.name?.message}</p>}
                         </Box>
                         <Box>

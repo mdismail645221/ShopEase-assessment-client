@@ -7,7 +7,7 @@ const Login = () => {
     return (
         <LOGIN>
             <PAPER>
-                <Typography sx={{fontSize: '2.5rem', textAlign: 'center', padding: '1.5rem 0', fontWeight: 'bold'}}>LOGIN</Typography>
+                <Typography sx={{fontSize: '1.5rem', textAlign: 'center', padding: '1.5rem 0', fontWeight: 'bold'}}>LOGIN</Typography>
                 <form>
                     <Stack spacing={3} >
                         <Box>
