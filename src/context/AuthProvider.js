@@ -7,7 +7,7 @@ const auth = getAuth(app)
 export const AUTHCONTEXT = createContext()
 
 const AuthProvider = ({children}) => {
-    const [user, setUser] = useState({user: "raju"})
+    const [user, setUser] = useState("")
     const [loading, setLoading] = useState(false)
 
 

@@ -1,15 +1,29 @@
 import { Box, Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
-import React from 'react';
+import React, { useContext } from 'react';
+import { AUTHCONTEXT } from '../../context/AuthProvider';
+
+
 
 const Product = ({ product }) => {
+    const {user} = useContext(AUTHCONTEXT)
+    console.log("product", user)
+
+
     const { image, model, price, rating, keyFeature } = product;
 
 
-
-    // 
-
+    // product save user info
     const handleSaveProduct = (product) => {
-        console.log(product)
+
+        if(product){
+            fetch(`http://localhost:5000/products`, {
+                method: 'POST',
+                headers: {
+                    'content-type' : 'application/json'
+                },
+                body: JSON.stringify(product)
+            })
+        }
     }
 
 
