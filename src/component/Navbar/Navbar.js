@@ -15,43 +15,12 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { NavLink } from 'react-router-dom';
 import { Avatar } from '@mui/material';
+import { AUTHCONTEXT } from '../../context/AuthProvider';
 
 
 
 
-const navItems = <>
-    <ListItem disablePadding>
-        <ListItemButton sx={{ textAlign: 'center' }}>
-            <NavLink to="/">
-                <ListItemText primary="Home" />
-            </NavLink>
-        </ListItemButton>
-    </ListItem>
-    {/* savecart */}
-    <ListItem disablePadding>
-        <ListItemButton sx={{ textAlign: 'center' }}>
-            <NavLink to="/saveCart">
-                <ListItemText primary="Savecart" />
-            </NavLink>
-        </ListItemButton>
-    </ListItem>
-    {/* login */}
-    <ListItem disablePadding>
-        <ListItemButton sx={{ textAlign: 'center' }}>
-            <NavLink to="/login">
-                <ListItemText primary="login" />
-            </NavLink>
-        </ListItemButton>
-    </ListItem>
-    {/* user logo */}
-    <ListItem disablePadding>
-        <ListItemButton sx={{ textAlign: 'center' }}>
-            <IconButton  sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.iconfinder.com%2Ficons%2F285655%2Fuser_icon&psig=AOvVaw3MlXgY883gDZ1t5AFqwHYU&ust=1676040648293000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCLjWx43YiP0CFQAAAAAdAAAAABAE" />
-            </IconButton>
-        </ListItemButton>
-    </ListItem>
-</>
+
 
 
 
@@ -60,6 +29,49 @@ const navItems = <>
 
 
 function Navbar(props) {
+    // user info 
+    const { user } = React.useContext(AUTHCONTEXT);
+    console.log("navbar user info", user)
+
+
+
+    const navItems = <>
+        <ListItem disablePadding>
+            <ListItemButton sx={{ textAlign: 'center' }}>
+                <NavLink to="/">
+                    <ListItemText primary="Home" />
+                </NavLink>
+            </ListItemButton>
+        </ListItem>
+        {/* savecart */}
+        <ListItem disablePadding>
+            <ListItemButton sx={{ textAlign: 'center' }}>
+                <NavLink to="/saveCart">
+                    <ListItemText primary="Savecart" />
+                </NavLink>
+            </ListItemButton>
+        </ListItem>
+        {/* login */}
+        <ListItem disablePadding>
+            <ListItemButton sx={{ textAlign: 'center' }}>
+                <NavLink to="/login">
+                    <ListItemText primary="login" />
+                </NavLink>
+            </ListItemButton>
+        </ListItem>
+        {/* user logo */}
+        <ListItem disablePadding>
+            <ListItemButton sx={{ textAlign: 'center' }}>
+                <IconButton sx={{ p: 0 }}>
+                    <Avatar alt="Remy Sharp" src={user?.photoURL} />
+                </IconButton>
+            </ListItemButton>
+        </ListItem>
+    </>
+
+
+
+
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -81,6 +93,7 @@ function Navbar(props) {
 
     const container = window !== undefined ? () => window().document.body : undefined;
 
+  
 
 
 

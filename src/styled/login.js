@@ -2,7 +2,7 @@ import { Paper, styled } from "@mui/material";
 
 export const LOGIN = styled('div')(({ theme }) => ({
     width: '100%',
-    background: 'gray',
+    background: '#ffffff',
     height: '100vh',
     display: 'grid',
     placeItems: 'center'

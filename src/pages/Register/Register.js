@@ -1,14 +1,16 @@
-import { Box, Button, Stack, TextField, Typography } from '@mui/material';
+import { Box, Button, IconButton, Stack, TextField, Typography } from '@mui/material';
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { REGISTER, REGPAPER } from './Register.styled';
+import { REGISTER, REGPAPER, REGSOCAILICONS } from './Register.styled';
 import { AUTHCONTEXT } from '../../context/AuthProvider';
 import { UploadImgBB } from '../../hooks/ImgUploadBB';
 import { toast } from 'react-hot-toast';
+import GoogleIcon from '@mui/icons-material/Google';
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 const Register = () => {
-    const { user, registerSigin, updateUser } = useContext(AUTHCONTEXT)
+    const { user, registerSigin, updateUser, googleSignIn } = useContext(AUTHCONTEXT)
     console.log(user)
     const [regError, setRegError] = useState(null)
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -17,6 +19,7 @@ const Register = () => {
 
 
     const handleLoginInfo = (data) => {
+   
 
         const imgFileData = (data.image[0]);
 
@@ -25,7 +28,7 @@ const Register = () => {
             .then((result) => {
                 const user = result.user;
                 // img upload operation hook target
-                if(user){
+                if (user) {
                     UploadImgBB(imgFileData).then(imgUrlLink => {
                         const userInfo = {
                             displayName: data?.name,
@@ -51,6 +54,25 @@ const Register = () => {
             });
 
     }
+
+
+    // google login functionality
+    const handleGoogleLogin = () => {
+        googleSignIn()
+            .then(result => {
+                const user = result.user;
+                console.log(user)
+                // form.reset()
+                toast.success("Successfully Login Good job", { duration: 3000 })
+                //  navigate(from, { replace: true })
+            })
+            .catch(err => {
+                //  setError(err.message)
+                console.log(err)
+            })
+    }
+
+
 
     return (
         <REGISTER>
@@ -83,6 +105,12 @@ const Register = () => {
                             <Button type='submit' variant="contained">Submit</Button>
                         </Box>
 
+                        <REGSOCAILICONS>
+                            <IconButton onClick={handleGoogleLogin}><GoogleIcon /></IconButton>
+                            <IconButton><GitHubIcon /></IconButton>
+                        </REGSOCAILICONS>
+
+                        {/* navigate user logic depended */}
                         <Box sx={{
                             '& a': { color: "blue" },
                             '& a:hover': { textDecoration: 'underline' }
@@ -92,6 +120,7 @@ const Register = () => {
 
                     </Stack>
                 </form>
+                {regError && <span className='text-red-600'>{Typography}</span>}
             </REGPAPER>
         </REGISTER>
     );

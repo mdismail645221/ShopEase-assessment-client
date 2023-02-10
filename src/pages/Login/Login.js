@@ -20,7 +20,7 @@ const Login = () => {
                         </Box>
 
                         <Box>
-                            <Button variant="contained">Contained</Button>
+                            <Button variant="contained">Submit</Button>
                         </Box>
 
                         <Box sx={{
