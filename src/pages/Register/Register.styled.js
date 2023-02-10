@@ -11,7 +11,7 @@ export const REGISTER = styled(Box)(({ theme }) => ({
 }));
 
 export const REGPAPER = styled(Paper)(({ theme }) => ({
-    width: '500px',
+    width: '450px',
     background: '#ffffff',
     height: '100%',
     padding: '1rem',

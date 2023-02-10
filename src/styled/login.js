@@ -10,7 +10,7 @@ export const LOGIN = styled('div')(({ theme }) => ({
 
 
 export const PAPER = styled(Paper)(({ theme }) => ({
-    width: '500px',
+    width: '400px',
     background: '#ffffff',
     height: '500px',
     padding: '1rem',
