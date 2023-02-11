@@ -85,12 +85,12 @@ const Register = () => {
                         <Box>
                             {/* <label htmlFor="name">Name</label> */}
                             <TextField type="text" sx={{ width: '100%',padding: '0px' }} label="Your Name" variant="outlined" {...register("name", { required: "Name is required" })} />
-                            {errors.email && <p className='text-red-600 font-semibold'>{errors?.name?.message}</p>}
+                            {errors.name && <p className='text-red-600 font-semibold'>{errors?.name?.message}</p>}
                         </Box>
                         <Box>
                             {/* <label htmlFor="name">Name</label> */}
                             <TextField type="file" sx={{ width: '100%', }} variant="outlined" {...register("image", { required: "image file is required" })} />
-                            {errors.email && <p className='text-red-600 font-semibold'>{errors?.image?.message}</p>}
+                            {errors.image && <p className='text-red-600 font-semibold'>{errors?.image?.message}</p>}
                         </Box>
                         <Box>
                             {/* <label htmlFor="name">Name</label> */}
@@ -100,7 +100,7 @@ const Register = () => {
                         <Box >
                             {/* <label htmlFor="name">Name</label> */}
                             <TextField type="password" sx={{ width: '100%', }} label="Password" variant="outlined" {...register("password", { required: "password is required" })} required />
-                            {errors.email && <p className='text-red-600 font-semibold'>{errors?.password?.message}</p>}
+                            {errors.password && <p className='text-red-600 font-semibold'>{errors?.password?.message}</p>}
                         </Box>
 
                         <Box>
@@ -122,7 +122,7 @@ const Register = () => {
 
                     </Stack>
                 </form>
-                {regError && <span className='text-red-600'>{Typography}</span>}
+                {regError && <p className='text-red-600'>{Typography}</p>}
             </REGPAPER>
         </REGISTER>
     );
