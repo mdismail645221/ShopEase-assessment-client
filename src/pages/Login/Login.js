@@ -7,60 +7,64 @@ import { LOGIN, PAPER } from '../../styled/login';
 import { REGSOCAILICONS } from '../Register/Register.styled';
 import GoogleIcon from '@mui/icons-material/Google';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import {useForm} from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useToken } from '../../hooks/useToken';
 
 
 
 const Login = () => {
-    const [error, setError] = useState(null)
-    const {register, handleSubmit, formState:{errors} }= useForm();
-    const {googleSignIn, signIn, user} = useContext(AUTHCONTEXT)
-    const [] = useToken(user)
+    const [error, setError] = useState(null);
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { googleSignIn, signIn, user } = useContext(AUTHCONTEXT);
+    const [token] = useToken(user);
+    console.log("token", token)
 
-
-    const  navigate = useNavigate();
+    // Private router 
+    const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
 
-    
+
 
 
     // user sign in method in firebase 
     const handleSignin = (data) => {
-        const {email, password} = data;
+        const { email, password } = data;
         signIn(email, password)
-        .then(result => {
-            setError(null)
-            const user = result.user;
-            console.log(user);
-            toast.success(`GOOD JOB. SUCCESSFULLY LOGIN ${user?.email}`)
-            
-        })
-        .catch((error)=> {
-            setError(error)
-        })
+            .then(result => {
+                setError(null)
+                const user = result.user;
+                console.log(user);
+                toast.success(`GOOD JOB. SUCCESSFULLY LOGIN ${user?.email}`)
+                localStorage.setItem("jwt-token", token)
+                navigate(from, { replace: true });
+
+            })
+            .catch((error) => {
+                setError(error)
+            })
     }
 
-        // google login functionality
-        const handleGoogleLogin = () => {
-            googleSignIn()
-                .then(result => {
-                    const user = result.user;
-                    console.log(user)
-                    toast.success("Successfully Login Good job", { duration: 3000 })
-                    //  navigate(from, { replace: true })
-                })
-                .catch(err => {
-                     setError(err.message)
-                    console.log(err)
-                })
-        }
+    // google login functionality
+    const handleGoogleLogin = () => {
+        googleSignIn()
+            .then(result => {
+                const user = result.user;
+                console.log(user)
+                toast.success("Successfully Login Good job", { duration: 3000 })
+                localStorage.setItem("jwt-token", token)
+                navigate(from, { replace: true });
+            })
+            .catch(err => {
+                setError(err.message)
+                console.log(err)
+            })
+    }
 
     return (
         <LOGIN>
             <PAPER>
-                <Typography sx={{fontSize: '1.5rem', textAlign: 'center', padding: '1.5rem 0', fontWeight: 'bold'}}>LOGIN</Typography>
+                <Typography sx={{ fontSize: '1.5rem', textAlign: 'center', padding: '1.5rem 0', fontWeight: 'bold' }}>LOGIN</Typography>
                 <form onSubmit={handleSubmit(handleSignin)}>
                     <Stack spacing={3} >
                         <Box>
@@ -70,7 +74,7 @@ const Login = () => {
                         </Box>
                         <Box >
                             {/* <label htmlFor="name">Name</label> */}
-                            <TextField sx={{width: '100%',}} type="password" id="outlined-basic" label="Password" variant="outlined" {...register("password", {required: "password is required"})} />
+                            <TextField sx={{ width: '100%', }} type="password" id="outlined-basic" label="Password" variant="outlined" {...register("password", { required: "password is required" })} />
                             {errors.password && <p className='text-red-600 font-semibold'>{errors?.password?.message}</p>}
                         </Box>
 
@@ -79,9 +83,9 @@ const Login = () => {
                         </Box>
 
                         <Box sx={{
-                            '& a':{color: "blue"},
-                            '& a:hover':{textDecoration: 'underline'}
-                            }}>
+                            '& a': { color: "blue" },
+                            '& a:hover': { textDecoration: 'underline' }
+                        }}>
                             <Typography>have you already <Link to='/register'>register</Link></Typography>
                         </Box>
 

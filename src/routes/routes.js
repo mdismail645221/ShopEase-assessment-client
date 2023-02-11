@@ -4,6 +4,7 @@ import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import UserSaveCart from "../pages/UserSaveCart/UserSaveCart";
+import PrivateRoute from "./PrivateRoute";
 
 
 
@@ -15,11 +16,11 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <Home></Home>
+                element: <PrivateRoute><Home></Home></PrivateRoute>
             },
             {
                 path: '/home',
-                element: <Home></Home>
+                element: <PrivateRoute><Home></Home></PrivateRoute>
             },
             {
                 path: '/login',
@@ -31,7 +32,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/saveCart',
-                element: <UserSaveCart></UserSaveCart>
+                element: <PrivateRoute><UserSaveCart></UserSaveCart></PrivateRoute>
             },
         ]
     }

@@ -31,9 +31,11 @@ import Badge from '@mui/material/Badge';
 
 
 function Navbar(props) {
-    // user info 
+
     const { user, LogOut } = React.useContext(AUTHCONTEXT);
     // console.log("navbar user info", user)
+
+   
 
 
 
@@ -49,7 +51,7 @@ function Navbar(props) {
         <ListItem disablePadding>
             <ListItemButton sx={{ textAlign: 'center' }}>
                 <NavLink to="/saveCart">
-                    <Badge badgeContent={4} color="primary">
+                    <Badge badgeContent={5} color="primary">
                         {/* <MailIcon color="action" /> */}
                     <ListItemText primary="Savecart" />
                     </Badge>

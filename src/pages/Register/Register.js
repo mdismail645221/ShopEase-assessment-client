@@ -1,6 +1,6 @@
 import { Box, Button, IconButton, Stack, TextField, Typography } from '@mui/material';
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { REGISTER, REGPAPER, REGSOCAILICONS } from './Register.styled';
 import { AUTHCONTEXT } from '../../context/AuthProvider';
@@ -15,11 +15,16 @@ const Register = () => {
     const [regError, setRegError] = useState(null)
     const { register, handleSubmit, formState: { errors } } = useForm();
 
+    // Private router 
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
+
 
 
 
     const handleLoginInfo = (data) => {
-   
+
 
         const imgFileData = (data.image[0]);
 
@@ -34,16 +39,17 @@ const Register = () => {
                             displayName: data?.name,
                             photoURL: imgUrlLink?.data?.display_url
                         }
-                        if(userInfo){
+                        if (userInfo) {
                             updateUser(userInfo)
-                            .then((result) => {
-                                toast.success(`Successfully register your  ${result.user.displayName} or ${result?.user?.email} & ${result?.user?.photoURL}`)
-                            })
-                            .catch((error) => {
-                                console.log(error)
-                                setRegError(error)
-                                toast.error(error)
-                            })
+                                .then((result) => {
+                                    toast.success(`Successfully register your  ${result.user.displayName} or ${result?.user?.email} & ${result?.user?.photoURL}`)
+                                    navigate(from, { replace: true });
+                                })
+                                .catch((error) => {
+                                    console.log(error)
+                                    setRegError(error)
+                                    toast.error(error)
+                                })
                         }
                     })
                 }
@@ -64,9 +70,8 @@ const Register = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user)
-                // form.reset()
                 toast.success("Successfully Login Good job", { duration: 3000 })
-                //  navigate(from, { replace: true })
+                 navigate(from, { replace: true })
             })
             .catch(err => {
                 //  setError(err.message)
@@ -84,7 +89,7 @@ const Register = () => {
                     <Stack spacing={3} >
                         <Box>
                             {/* <label htmlFor="name">Name</label> */}
-                            <TextField type="text" sx={{ width: '100%',padding: '0px' }} label="Your Name" variant="outlined" {...register("name", { required: "Name is required" })} />
+                            <TextField type="text" sx={{ width: '100%', padding: '0px' }} label="Your Name" variant="outlined" {...register("name", { required: "Name is required" })} />
                             {errors.name && <p className='text-red-600 font-semibold'>{errors?.name?.message}</p>}
                         </Box>
                         <Box>

@@ -24,6 +24,12 @@ export const useToken = (user) => {
                 body: JSON.stringify(userInfo)
                 
             })
+            .then(res=> res.json())
+            .then(data=> {
+                if (data.status === "success" && data.data){
+                    setToken(data.data)
+                }
+            })
         }
 
     }, [user])

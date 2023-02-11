@@ -7,7 +7,7 @@ import { AUTHCONTEXT } from '../../context/AuthProvider';
 
 
 const Product = ({ product }) => {
-    const {user} = useContext(AUTHCONTEXT)
+    const { user } = useContext(AUTHCONTEXT)
     // console.log("product", user)
     const navigate = useNavigate()
     const { pathname } = useLocation()
@@ -19,34 +19,46 @@ const Product = ({ product }) => {
 
     // product save user info
     const handleSaveProduct = (product) => {
+        // console
 
-        const productInfo = {...product, email: user?.email, userName: user?.displayName}
-        
-        if(product && user?.email && user?.displayName){
-            console.log("productInfo", productInfo)
+        const productInfo = {
+            email: user?.email,
+            userName: user?.displayName,
+            keyFeature: product?.keyFeature,
+            model: product?.model,
+            price: product?.price,
+            rating: product?.rating,
+            spec: product?.spec,
+            status: product?.status,
+            image: product?.image
+        }
+        console.log("productInfo", productInfo)
+
+        if (product && user?.email && user?.displayName) {
+            // console.log("productInfo", productInfo)
 
             fetch(`http://localhost:5000/products`, {
                 method: 'POST',
                 headers: {
-                    'content-type' : 'application/json'
+                    'content-type': 'application/json'
                 },
                 body: JSON.stringify(productInfo)
             })
-            .then(res => res.json())
-            .then(data => {
-                if(data.success){
-                    toast.success(`${data.message}`)
-                }
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        toast.success(`${data.message}`)
+                    }
 
-            })
-        }else{
+                })
+        } else {
             toast.error("Error")
             navigate('/register')
         }
     }
 
     // handle booking
-    const handleBooing  = (product) => {
+    const handleBooing = (product) => {
         toast.error("NOT FUNCTIONALITY...UPCOMMING SOON")
     }
 
