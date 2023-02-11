@@ -16,7 +16,7 @@ export const useToken = (user) => {
         }
         console.log(userInfo)
         if(userInfo){
-            fetch(`http://localhost:5000/jwt?email=${userInfo?.email}`, {
+            fetch(`https://shop-ease-assessment-sever.vercel.app/jwt?email=${userInfo?.email}`, {
                 method : 'PUT',
                 headers: {
                     'content-type': 'application/json',

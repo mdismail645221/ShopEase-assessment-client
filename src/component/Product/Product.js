@@ -37,7 +37,7 @@ const Product = ({ product }) => {
         if (product && user?.email && user?.displayName) {
             // console.log("productInfo", productInfo)
 
-            fetch(`http://localhost:5000/products`, {
+            fetch(`https://shop-ease-assessment-sever.vercel.app/products`, {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'

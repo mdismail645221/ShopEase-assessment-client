@@ -11,7 +11,7 @@ const Home = () => {
 
     useEffect(() => {
         setLoading(true)
-        fetch(`http://localhost:5000/products`, {
+        fetch(`https://shop-ease-assessment-sever.vercel.app/products`, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem("jwt-token")}`
             }

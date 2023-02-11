@@ -12,7 +12,7 @@ const UserSaveCart = () => {
     const [products, setProducts] = useState([])
     useEffect(() => {
         setLoading(true)
-        fetch(`http://localhost:5000/userProduct?email=${user?.email}`, {
+        fetch(`https://shop-ease-assessment-sever.vercel.app/userProduct?email=${user?.email}`, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem("jwt-token")}`
             }
