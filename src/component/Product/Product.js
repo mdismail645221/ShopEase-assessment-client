@@ -1,7 +1,7 @@
 import { Box, Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
 import React, { useContext } from 'react';
 import { toast } from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { AUTHCONTEXT } from '../../context/AuthProvider';
 
 
@@ -10,6 +10,8 @@ const Product = ({ product }) => {
     const {user} = useContext(AUTHCONTEXT)
     // console.log("product", user)
     const navigate = useNavigate()
+    const { pathname } = useLocation()
+    // console.log("location", location)
 
 
     const { image, model, price, rating, keyFeature } = product;
@@ -19,9 +21,10 @@ const Product = ({ product }) => {
     const handleSaveProduct = (product) => {
 
         const productInfo = {...product, email: user?.email, userName: user?.displayName}
-        // console.log("productInfo", productInfo)
+        
+        if(product && user?.email && user?.displayName){
+            console.log("productInfo", productInfo)
 
-        if(productInfo){
             fetch(`http://localhost:5000/products`, {
                 method: 'POST',
                 headers: {
@@ -31,13 +34,20 @@ const Product = ({ product }) => {
             })
             .then(res => res.json())
             .then(data => {
-                console.log("productInfo", data)
-                toast.success("successfully save the cart")
+                if(data.success){
+                    toast.success(`${data.message}`)
+                }
+
             })
         }else{
             toast.error("Error")
+            navigate('/register')
         }
-        navigate('/register')
+    }
+
+    // handle booking
+    const handleBooing  = (product) => {
+        toast.error("NOT FUNCTIONALITY...UPCOMMING SOON")
     }
 
 
@@ -67,7 +77,16 @@ const Product = ({ product }) => {
                     </Typography>
                 </Box>
             </CardContent>
-            <CardActions sx={{
+            {pathname === "/saveCart" && <CardActions sx={{
+                '& .css-105q9jb-MuiButtonBase-root-MuiButton-root': {
+                    padding: '5px 8px',
+                }
+            }} onClick={() => handleBooing(product)}>
+                <Button variant="contained" size="small">
+                    Book Now
+                </Button>
+            </CardActions>}
+            {pathname === "/" && <CardActions sx={{
                 '& .css-105q9jb-MuiButtonBase-root-MuiButton-root': {
                     padding: '5px 8px',
                 }
@@ -75,7 +94,7 @@ const Product = ({ product }) => {
                 <Button variant="contained" size="small">
                     Save Cart
                 </Button>
-            </CardActions>
+            </CardActions>}
         </Card>
     );
 };

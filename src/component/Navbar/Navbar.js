@@ -16,6 +16,8 @@ import Typography from '@mui/material/Typography';
 import { NavLink } from 'react-router-dom';
 import { Avatar } from '@mui/material';
 import { AUTHCONTEXT } from '../../context/AuthProvider';
+import Badge from '@mui/material/Badge';
+// import MailIcon from '@mui/icons-material/Mail';
 
 
 
@@ -47,7 +49,10 @@ function Navbar(props) {
         <ListItem disablePadding>
             <ListItemButton sx={{ textAlign: 'center' }}>
                 <NavLink to="/saveCart">
+                    <Badge badgeContent={4} color="primary">
+                        {/* <MailIcon color="action" /> */}
                     <ListItemText primary="Savecart" />
+                    </Badge>
                 </NavLink>
             </ListItemButton>
         </ListItem>
