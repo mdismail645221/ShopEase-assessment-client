@@ -8,7 +8,7 @@ const UserSaveCart = () => {
     useEffect(()=>{
         fetch(`http://localhost:5000/userProduct?email=${user?.email}`)
         .then(res => res.json())
-        .then(data => console.log(data))
+        .then(data => console.log("UserSaveCart", data))
     }, [user.email])
 
 

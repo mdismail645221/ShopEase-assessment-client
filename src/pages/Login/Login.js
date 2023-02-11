@@ -1,20 +1,27 @@
 import { Box, Button, IconButton, Paper, Stack, TextField, Typography } from '@mui/material';
 import React, { useContext, useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AUTHCONTEXT } from '../../context/AuthProvider';
 import { LOGIN, PAPER } from '../../styled/login';
 import { REGSOCAILICONS } from '../Register/Register.styled';
 import GoogleIcon from '@mui/icons-material/Google';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import {useForm} from 'react-hook-form';
+import { useToken } from '../../hooks/useToken';
+
 
 
 const Login = () => {
     const [error, setError] = useState(null)
     const {register, handleSubmit, formState:{errors} }= useForm();
-    const {googleSignIn, signIn} = useContext(AUTHCONTEXT)
+    const {googleSignIn, signIn, user} = useContext(AUTHCONTEXT)
+    const [] = useToken(user)
 
+
+    const  navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
 
     
 
@@ -28,6 +35,7 @@ const Login = () => {
             const user = result.user;
             console.log(user);
             toast.success(`GOOD JOB. SUCCESSFULLY LOGIN ${user?.email}`)
+            
         })
         .catch((error)=> {
             setError(error)

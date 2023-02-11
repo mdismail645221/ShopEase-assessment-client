@@ -19,7 +19,7 @@ const Product = ({ product }) => {
     const handleSaveProduct = (product) => {
 
         const productInfo = {...product, email: user?.email, userName: user?.displayName}
-        console.log("productInfo", productInfo)
+        // console.log("productInfo", productInfo)
 
         if(productInfo){
             fetch(`http://localhost:5000/products`, {
@@ -29,10 +29,15 @@ const Product = ({ product }) => {
                 },
                 body: JSON.stringify(productInfo)
             })
+            .then(res => res.json())
+            .then(data => {
+                console.log("productInfo", data)
+                toast.success("successfully save the cart")
+            })
         }else{
             toast.error("Error")
-            navigate('/register')
         }
+        navigate('/register')
     }
 
 
