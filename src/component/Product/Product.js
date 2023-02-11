@@ -1,12 +1,15 @@
 import { Box, Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
 import React, { useContext } from 'react';
+import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import { AUTHCONTEXT } from '../../context/AuthProvider';
 
 
 
 const Product = ({ product }) => {
     const {user} = useContext(AUTHCONTEXT)
-    console.log("product", user)
+    // console.log("product", user)
+    const navigate = useNavigate()
 
 
     const { image, model, price, rating, keyFeature } = product;
@@ -15,14 +18,20 @@ const Product = ({ product }) => {
     // product save user info
     const handleSaveProduct = (product) => {
 
-        if(product){
+        const productInfo = {...product, email: user?.email, userName: user?.displayName}
+        console.log("productInfo", productInfo)
+
+        if(productInfo){
             fetch(`http://localhost:5000/products`, {
                 method: 'POST',
                 headers: {
                     'content-type' : 'application/json'
                 },
-                body: JSON.stringify(product)
+                body: JSON.stringify(productInfo)
             })
+        }else{
+            toast.error("Error")
+            navigate('/register')
         }
     }
 

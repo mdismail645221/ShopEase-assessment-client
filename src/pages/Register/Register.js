@@ -24,7 +24,7 @@ const Register = () => {
         const imgFileData = (data.image[0]);
 
 
-        registerSigin(data.email, data.password)
+        registerSigin(data?.email, data?.password)
             .then((result) => {
                 const user = result.user;
                 // img upload operation hook target
@@ -34,15 +34,17 @@ const Register = () => {
                             displayName: data?.name,
                             photoURL: imgUrlLink?.data?.display_url
                         }
-                        updateUser(userInfo)
+                        if(userInfo){
+                            updateUser(userInfo)
                             .then((result) => {
                                 toast.success(`Successfully register your  ${result.user.displayName} or ${result?.user?.email} & ${result?.user?.photoURL}`)
                             })
                             .catch((error) => {
-                                console.log(error.message)
+                                console.log(error)
                                 setRegError(error)
-                                toast.error(error.message)
+                                toast.error(error)
                             })
+                        }
                     })
                 }
             })

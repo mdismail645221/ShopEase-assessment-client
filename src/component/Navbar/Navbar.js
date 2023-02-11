@@ -30,8 +30,8 @@ import { AUTHCONTEXT } from '../../context/AuthProvider';
 
 function Navbar(props) {
     // user info 
-    const { user } = React.useContext(AUTHCONTEXT);
-    console.log("navbar user info", user)
+    const { user, LogOut } = React.useContext(AUTHCONTEXT);
+    // console.log("navbar user info", user)
 
 
 
@@ -59,14 +59,23 @@ function Navbar(props) {
                 </NavLink>
             </ListItemButton>
         </ListItem>
+        {/* logout conditional rendaring */}
+       {user && <ListItem disablePadding >
+            <ListItemButton onClick={()=> LogOut()} sx={{ textAlign: 'center' }}>
+                <NavLink to="/login">
+                    <ListItemText primary="Logout" />
+                </NavLink>
+            </ListItemButton>
+        </ListItem>}
+
         {/* user logo */}
-        <ListItem disablePadding>
+       {user && <ListItem disablePadding>
             <ListItemButton sx={{ textAlign: 'center' }}>
                 <IconButton sx={{ p: 0 }}>
                     <Avatar alt="Remy Sharp" src={user?.photoURL} />
                 </IconButton>
             </ListItemButton>
-        </ListItem>
+        </ListItem>}
     </>
 
 
